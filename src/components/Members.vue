@@ -28,6 +28,7 @@ export default {
   mounted() {
     this.$store.dispatch('LOAD_MEMBERS_LIST');
     firebaseApp.messaging().onTokenRefresh(this.handleTokenRefresh);
+    this.subscribe();
   },
   methods: {
     registerServiceWorker() {
@@ -42,7 +43,6 @@ export default {
       }
     },
     subscribe() {
-      console.log('subscribe');
       firebaseApp.messaging()
         .requestPermission()
         .then(() => { this.handleTokenRefresh(); });
@@ -51,7 +51,6 @@ export default {
       return firebaseApp.messaging()
         .getToken()
         .then((token) => {
-          console.log(token);
           firebaseApp.database().ref('/tokens').push({
             token,
           });
