@@ -27,6 +27,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('LOAD_MEMBERS_LIST');
+    firebaseApp.messaging().onTokenRefresh(this.handleTokenRefresh);
   },
   methods: {
     registerServiceWorker() {
@@ -44,15 +45,16 @@ export default {
       console.log('subscribe');
       firebaseApp.messaging()
         .requestPermission()
-        .then(() => {
-          firebaseApp.messaging()
-            .getToken()
-            .then((token) => {
-              console.log(token);
-              firebaseApp.database().ref('/tokens').push({
-                token,
-              });
-            });
+        .then(() => { this.handleTokenRefresh(); });
+    },
+    handleTokenRefresh() {
+      return firebaseApp.messaging()
+        .getToken()
+        .then((token) => {
+          console.log(token);
+          firebaseApp.database().ref('/tokens').push({
+            token,
+          });
         });
     },
   },
@@ -70,14 +72,18 @@ ul {
   padding: 0;
   display: table;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 li {
   display: block;
   margin: 10px 0;
-  width: 25%;
+  width: 50%;
   float: left;
-  text-align: left;
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 102px;
 }
 
 li img {
