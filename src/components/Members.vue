@@ -27,7 +27,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('LOAD_MEMBERS_LIST');
-    firebaseApp.messaging().onTokenRefresh(this.handleTokenRefresh);
     this.subscribe();
   },
   methods: {
@@ -39,6 +38,7 @@ export default {
         navigator.serviceWorker.ready
           .then((serviceWorkerRegistration) => {
             firebaseApp.messaging().useServiceWorker(serviceWorkerRegistration);
+            firebaseApp.messaging().onTokenRefresh(this.handleTokenRefresh);
           });
       }
     },
