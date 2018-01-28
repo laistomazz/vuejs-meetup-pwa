@@ -52,7 +52,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, '../src/sw.js'),
+      entry: path.join(__dirname, '../src/sw-prod.js'),
+      excludes: ['**/.*', '**/*.map', '*.html'],
+      include: ['dist/**/*.{js,html,css}'],
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
