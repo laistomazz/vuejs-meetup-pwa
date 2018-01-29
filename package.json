@@ -1,7 +1,7 @@
 {
   "name": "vuejs-meetup-pwa",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Vue.js + VueFire + Vuex + FCM",
   "author": "Laís Tomaz <laisotomaz@gmail.com>",
   "private": true,
   "scripts": {
