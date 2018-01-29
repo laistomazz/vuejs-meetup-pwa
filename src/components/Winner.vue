@@ -1,6 +1,7 @@
 <template>
-  <div v-if="winner !== ''">
-    <h2>Congratulations {{ winner }}!</h2>
+  <div v-if="winner.user">
+    <h2>Congratulations {{ winner.user }}!</h2>
+    <img :src="winner.userProfileImg" :alt="`Pic of ${winner.user}`">
     <h3>You won 1 million coxinhas!</h3>
   </div>
 </template>
@@ -12,7 +13,7 @@ export default {
   name: 'winner',
   data() {
     return {
-      winner: '',
+      winner: {},
     };
   },
   mounted() {
@@ -28,7 +29,7 @@ export default {
           const snapshot = data.val();
           const winner = snapshot[Object.keys(snapshot)[0]];
 
-          this.winner = winner.user;
+          this.winner = winner;
         });
     },
   },

@@ -4,8 +4,10 @@
     <h2>Participantes</h2>
     <ul v-if="members.length > 0">
       <li v-for="member in members">
-        <img :src="member.photo.thumb_link" :alt="`Pic of ${member.name}`">
-        <h3>{{ member.name }}</h3>
+        <div class="wrapper">
+          <div class="photo" :style="`background-image: url(${member.photo.thumb_link})`"></div>
+          <h3>{{ member.name }}</h3>
+        </div>
       </li>
     </ul>
   </div>
@@ -77,22 +79,33 @@ ul {
 
 li {
   display: block;
-  margin: 10px 0;
+  margin: 0 0 10px;
   width: 50%;
   float: left;
-  border: 1px solid #ccc;
   padding: 10px;
-  min-height: 102px;
 }
 
-li img {
-  height: 100%;
-  width: auto;
+li .wrapper {
+  border: 1px solid #ccc;
+  display: table;
+  width: 100%;
+  text-align: left;
+}
+
+li .photo {
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   float: left;
   margin: 0 10px 0 0;
 }
 
-a {
-  color: #35495E;
+@media (max-width: 768px) {
+  li {
+    width: 100%;
+  }
 }
+
 </style>
