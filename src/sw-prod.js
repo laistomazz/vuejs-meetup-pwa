@@ -15,10 +15,12 @@ const CACHE_NAME = new Date().toISOString();
 
 let assetsToCache = [...assets, './'];
 
-assetsToCache = assetsToCache.map(path => new URL(path, global.location).toString() );
+assetsToCache = assetsToCache.map(path => new URL(path, global.location).toString());
 
 // When the service worker is first added to a computer.
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
+
   // Perform install steps.
   if (DEBUG) {
     console.log('[SW] Install event');
