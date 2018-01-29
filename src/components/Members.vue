@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="subscribe">I want to know the winner!</button>
+    <button @click="subscribe" v-if="!isRegistered">I want to know the winner!</button>
     <h2>Participantes</h2>
     <ul v-if="members.length > 0">
       <li v-for="member in members">
@@ -19,6 +19,11 @@ import { firebaseApp } from '../firebase';
 
 export default {
   name: 'members',
+  data() {
+    return {
+      isRegistered: false,
+    };
+  },
   computed: {
     members() {
       return this.$store.state.members;
@@ -53,6 +58,7 @@ export default {
       return firebaseApp.messaging()
         .getToken()
         .then((token) => {
+          this.isRegistered = true;
           firebaseApp.database().ref('/tokens').push({
             token,
           });
