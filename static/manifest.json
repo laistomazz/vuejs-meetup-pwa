@@ -1,6 +1,6 @@
 {
   "name": "Vue.js Meetup PWA",
-  "short_name": "vuejs-meetup-pwa",
+  "short_name": "Vue PWA",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
